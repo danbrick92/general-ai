@@ -1,0 +1,11 @@
+openai
+pyttsx3
+google-cloud-texttospeech
+google-cloud-speech
+pydub
+simpleaudio
+sounddevice
+scipy
+wavio
+torch>=1.0.2
+torchaudio >= 0.9.0
