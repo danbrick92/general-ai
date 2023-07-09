@@ -23,15 +23,14 @@ class GoogleSpeechToText(Listener):
         self.frequency = 16000
         self.time_limit = 30
         logging.debug("Loading VAD model...")
-        self.model, self.utils = torch.hub.load(repo_or_dir='snakers4/silero-vad',
-                                      model='silero_vad',
-                                      force_reload=True,
-                                      onnx=False)
+        self.model, self.utils = torch.hub.load(repo_or_dir='snakers4/silero-vad', model='silero_vad',force_reload=False,onnx=False)
         self.interval = 2
 
-    def listen(self) -> str:
+    def listen(self, led=None) -> str:
         # Record the user
+        if led: led.set_state('recording')
         recording = self.record()
+        if led: led.set_state('busy')
 
         # Save temp recording
         logging.debug(f"Saving temp recording to {self.file_name}...")

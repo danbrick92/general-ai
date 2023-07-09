@@ -64,6 +64,7 @@ For conversation, to start, I will use a Raspberry PI. This will contain the fol
 - Speaker (to provide audio output)
 
 Eventually, I'd like to expand this design to include cameras, a screen, and more sensors. 
+I will provide a schematic and photos/videos when this works. 
 
 # Limitations
 - There is no config file yet

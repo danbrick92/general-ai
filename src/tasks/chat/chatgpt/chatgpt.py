@@ -7,12 +7,15 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class ChatGPT(Chat):
 
-    def __init__(self, actuators: list, sensors: list):
+    def __init__(self, actuators: list, sensors: list, extras={}):
         super().__init__(actuators, sensors)
         self.model = "gpt-3.5-turbo"
         self.messages = []
+        self.button, self.led = extras.get('button'), extras.get('led')
+        self.is_pi = self.button is not None
 
     def chat(self):
+        self.set_led_state(state='busy')
         self.speaker.speak("How may I assist you today?")
         while True:
             logging.info("Awaiting user's key press...")
@@ -20,7 +23,7 @@ class ChatGPT(Chat):
 
             # Get user question / statement
             logging.info("Getting user's input...")
-            query = self.listener.listen()
+            query = self.listener.listen(self.led)
 
             logging.info("Checking special conditions on user entry...")
             if self.check_exit_condition(query):
@@ -36,6 +39,7 @@ class ChatGPT(Chat):
             # Say that it is thinking
             logging.info("Letting user know that it's thinking...")
             self.speaker.speak("Hmmm... thinking...")
+            self.set_led_state('chatgpt_busy')
 
             # Get ChatGPT reply
             logging.info("Waiting for ChatGPT reply...")
@@ -44,11 +48,19 @@ class ChatGPT(Chat):
             # Speak
             logging.info("Speaking reply...")
             self.speaker.speak(reply)
+ 
+    def await_key_press(self):
+        if self.is_pi:
+            self.set_led_state('await_key')
+            response = self.button.await_input()
+            self.set_led_state('busy')
+        else:
+            response = input("\nPress the Enter key to ask another question: ")
 
-    @staticmethod
-    def await_key_press():
-        response = input("\nPress the Enter key to ask another question: ")
-
+    def set_led_state(self, state):
+        if self.is_pi:
+            self.led.set_state(state)
+        
     @staticmethod
     def check_exit_condition(query: str) -> bool:
         qlower = query.lower()
