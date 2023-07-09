@@ -1,5 +1,6 @@
 # Raspberry Pi Instructions
-These are the steps I took to get the Raspberry PI working 
+These are the steps I took to get the Raspberry PI working .
+This supports chat right now.
 
 
 ## Hardware Required
@@ -16,12 +17,12 @@ I used the following components:
 
 
 ## Hardware Schematic
-...
+![image of schematic](img/schematic.jpg)
 
 
 ## Software Install Steps
 ### 1 - Install Raspberry Pi Os
-Start with a fresh install of Raspberry Pi OS. 
+Start with a fresh installation of Raspberry Pi OS. 
 Note that you will need a 64-bit version! You can select this in the imager.
 https://www.raspberrypi.com/software/
 
@@ -32,7 +33,7 @@ Once the SD card is imaged, you can insert it in your Raspberry Pi to go through
 ### 2 - Run the following commands
 
 This will install support for recording:
-sudo apt-get install libportaudio2
+<code> sudo apt-get install libportaudio2 </code>
 
 
 ### 3 - Set your credentials
@@ -46,25 +47,26 @@ I recommend writing this in your ~/.bashrc so that each time a terminal is loade
 
 
 ### 4 - Clone the git repo
-Run this in your command line: git clone https://github.com/danbrick92/general-ai.git
+Run this in your command line: 
+<code> git clone https://github.com/danbrick92/general-ai.git </code>
 
 
 ### 5 - Pip installs
 In the root directory of general-ai, run :
 
-pip install -r requirements.txt
+<code> pip install -r requirements.txt </code>
 
 
 ### 6 - Test it
 Before you try it, close as many apps as possible. This is not lightweight.
 
-Run: python src/main.py
+Run: <code> python src/main.py </code>
 
 The software should now work.
 
 ### 7 - Set script to auto-run on start
 When everything is working, add the following line to your ~/.bashrc file:
-python /home/pi/git/general-ai/src/main.py
+<code> python /home/pi/git/general-ai/src/main.py </code>
 
 This will make it so that the script runs when you start the pi. Note that it can take some time to boot.
 Also note that if you say "exit", it will close the program.

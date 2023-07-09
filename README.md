@@ -1,6 +1,6 @@
 # General AI
 <b>Author</b>: Dan Brickner </br>
-<b>Project Description</b>: This project interfaces several state of the art AI libraries and APIs together to perform interesting AI activities. </br>
+<b>Project Description</b>: This project interfaces several state-of-the-art AI libraries and APIs together to perform interesting AI activities. </br>
 
 <i>Note: this project is very much a work in progress.</i>
 
@@ -15,10 +15,7 @@ You will also need the following APIs enabled:
 
 ## OpenAI
 In order to use Chat, you will need an OpenAI account with a pay-as-you-go subscription. 
-Once you have an API Key, you can reference it in the code
-
-## Docker
-I plan to release a Docker image that will automate most of the installation process
+Once you have an API Key, you can reference it in the code. 
 
 ## Manual
 The following installs must be performed on your Operating System:
@@ -55,16 +52,9 @@ The project is broken down into three pieces:
 Each of these are abstract classes that are concretely implemented with real technology, but can be swapped out.
 Why? For example, for the Text to Speech actuator, you can swap Google's TTS with PyTTSX3, which is more robotic but also not require network connectivity.
 
-### For Edge Devices
-My plan is to move this program to an edge device. 
-For conversation, to start, I will use a Raspberry PI. This will contain the following parts:
-- Multi-color LED (to indicate conversation status)
-- Button (to interrupt)
-- Microphone (to hear what you are saying)
-- Speaker (to provide audio output)
-
-Eventually, I'd like to expand this design to include cameras, a screen, and more sensors. 
-I will provide a schematic and photos/videos when this works. 
+### For Raspberry Pi
+For conversation, to start, I have used a Raspberry PI.
+Please refer to PI_README.md for more, including schematics and software installation.
 
 # Limitations
 - There is no config file yet
